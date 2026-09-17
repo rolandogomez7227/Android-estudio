@@ -54,11 +54,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 })
             } else {
-                android.widget.Toast.makeText(
-                    this@LoginActivity,
-                    "Llena todos los campos",
-                    android.widget.Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@LoginActivity, "Llena todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
     }
