@@ -27,6 +27,18 @@ class RutinaActivity : AppCompatActivity() {
             .load("https://fitcron.com/exercise/press-banca-abierto-con-barra-pectoral/")
             .into(gifEjercicio)
 
+        // Hacemos la petición GET para descargar las rutinas de la base de datos
+        api.getRutinas().enqueue(object : Callback<List<Rutina>> {
+            override fun onResponse(call: Call<List<Rutina>>, response: Response<List<Rutina>>) {
+                if (response.isSuccessful && response.body() != null) {
+                    // Si todo sale bien, le pasamos la lista de la base de datos al Adaptador
+                    val rutinasDeLaBaseDeDatos = response.body()!!
+                    val adapter = RutinaAdapter(rutinasDeLaBaseDeDatos)
+                    rvRutinas.adapter = adapter
+                } else {
+                    Toast.makeText(this@HomeActivity, "Error al cargar los datos", Toast.LENGTH_SHORT).show()
+                }
+            }
 
         btnRegresar.setOnClickListener {
             finish()
