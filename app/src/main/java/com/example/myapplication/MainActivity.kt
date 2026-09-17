@@ -16,6 +16,13 @@ class LoginActivity : AppCompatActivity() {
         val etCorreo = findViewById<EditText>(R.id.etCorreo)
         val etPassword = findViewById<EditText>(R.id.etPassword)
 
+        val tvIrRegistro = findViewById<TextView>(R.id.tvIrRegistro)
+
+        tvIrRegistro.setOnClickListener {
+            val intent = Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
+        }
+
         btnIniciarSesion.setOnClickListener {
             val correo = etCorreo.text.toString()
             val password = etPassword.text.toString()
