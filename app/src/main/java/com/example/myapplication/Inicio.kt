@@ -24,10 +24,7 @@ class HomeActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        Glide.with(this)
-            .asGif()
-            .load("https://fitcron.com/exercise/press-banca-abierto-con-barra-pectoral/")
-            .into(gifEjercicio)
+        val api = retrofit.create(ApiService::class.java)
 
         // Hacemos la petición GET para descargar las rutinas de la base de datos
         api.getRutinas().enqueue(object : Callback<List<Rutina>> {
