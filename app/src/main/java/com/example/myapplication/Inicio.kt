@@ -19,8 +19,10 @@ class HomeActivity : AppCompatActivity() {
         val rvRutinas = findViewById<RecyclerView>(R.id.rvRutinas)
         rvRutinas.layoutManager = LinearLayoutManager(this)
 
-        val btnRegresar = findViewById<Button>(R.id.btnRegresar)
-        val gifEjercicio = findViewById<ImageView>(R.id.gifEjercicio)
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
         Glide.with(this)
             .asGif()
