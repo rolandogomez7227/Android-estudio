@@ -29,27 +29,8 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
-        <ImageView
-            android:id="@+id/gifPressBanca"
-            android:layout_width="295dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="16dp"
-            android:background="#E0E0E0" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Instrucciones:\n1. Acuéstate en el banco plano.\n2. Agarra la barra un poco más ancho que tus hombros.\n3. Baja la barra lentamente hasta el pecho.\n4. Empuja con fuerza hacia arriba."
-            android:textSize="16sp"
-            android:layout_marginBottom="32dp"/>
-
-        <Button
-            android:id="@+id/btnRegresar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Regresar"
-            android:backgroundTint="#C5CAE9"
-            android:textColor="#000000"/>
-
-    </LinearLayout>
-</ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRutinas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
