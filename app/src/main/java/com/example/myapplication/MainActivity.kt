@@ -45,11 +45,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, "¡Sesión iniciada!", Toast.LENGTH_SHORT).show()
                             // Aquí pondremos el código para ir al Home más adelante
                         } else {
-                            android.widget.Toast.makeText(
-                                this@LoginActivity,
-                                "Credenciales incorrectas",
-                                android.widget.Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
                         }
                     }
 
