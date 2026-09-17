@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (correo.isNotEmpty() && password.isNotEmpty()) {
                 val retrofit = retrofit2.Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:8000/")
+                    .baseUrl("http://127.0.0.1:8000/")
                     .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
                     .build()
 
