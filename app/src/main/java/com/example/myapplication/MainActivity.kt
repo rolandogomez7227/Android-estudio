@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_main)
 
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
         val etCorreo = findViewById<EditText>(R.id.etCorreo)
