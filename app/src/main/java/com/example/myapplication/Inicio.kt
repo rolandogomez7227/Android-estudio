@@ -16,10 +16,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        Glide.with(this)
-            .asGif()
-            .load(R.drawable.press_banca)
-            .into(gifImageView)
+        val rvRutinas = findViewById<RecyclerView>(R.id.rvRutinas)
+        rvRutinas.layoutManager = LinearLayoutManager(this)
 
         val btnRegresar = findViewById<Button>(R.id.btnRegresar)
         val gifEjercicio = findViewById<ImageView>(R.id.gifEjercicio)
