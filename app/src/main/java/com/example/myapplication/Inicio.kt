@@ -39,8 +39,9 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
 
-        btnRegresar.setOnClickListener {
-            finish()
-        }
+            override fun onFailure(call: Call<List<Rutina>>, t: Throwable) {
+                Toast.makeText(this@HomeActivity, "Fallo de conexión: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
