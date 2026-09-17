@@ -54,11 +54,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: retrofit2.Call<LoginResponse>, t: Throwable) {
-                        android.widget.Toast.makeText(
-                            this@LoginActivity,
-                            "Error de red: ${t.message}",
-                            android.widget.Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@LoginActivity, "Error de red: ${t.message}", Toast.LENGTH_LONG).show()
                     }
                 })
             } else {
