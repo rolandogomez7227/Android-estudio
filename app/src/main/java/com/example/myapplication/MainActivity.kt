@@ -42,12 +42,8 @@ class LoginActivity : AppCompatActivity() {
                         response: retrofit2.Response<LoginResponse>
                     ) {
                         if (response.isSuccessful) {
-                            android.widget.Toast.makeText(
-                                this@LoginActivity,
-                                "¡Sesión iniciada!",
-                                android.widget.Toast.LENGTH_SHORT
-                            ).show()
-
+                            Toast.makeText(this@LoginActivity, "¡Sesión iniciada!", Toast.LENGTH_SHORT).show()
+                            // Aquí pondremos el código para ir al Home más adelante
                         } else {
                             android.widget.Toast.makeText(
                                 this@LoginActivity,
