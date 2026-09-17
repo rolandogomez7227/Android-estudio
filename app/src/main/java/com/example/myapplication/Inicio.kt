@@ -14,10 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rutina)
-
-        val gifImageView = findViewById<ImageView>(R.id.gifPressBanca)
-
+        setContentView(R.layout.activity_home)
 
         Glide.with(this)
             .asGif()
