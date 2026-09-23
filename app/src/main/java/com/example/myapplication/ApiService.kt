@@ -1,24 +1,38 @@
 package com.example.myapplication
 
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.POST
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
 
-//  Definimos todas las estructuras de datos que viajan entre tu app y Node.js
 data class LoginRequest(val email: String, val password: String)
 data class LoginResponse(val token: String?, val message: String?)
-data class Rutina(val id: Int, val name: String, val image_url: String?)
-data class RegisterRequest(val nombre: String, val correo: String, val password: String)
+data class RegisterRequest(val username: String, val email: String, val password: String)
 
-// Definimos las rutas (endpoints) a las que se conecta la app
+// Cambiamos el ID a String porque la base de datos de tu compañero usa texto (ej. "0001")
+data class Rutina(
+    @SerializedName("id") val id: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("image") val image: String?
+)
+
+data class ExercisesResponse(
+    @SerializedName("data") val data: List<Rutina>,
+    @SerializedName("total") val total: Int,
+    @SerializedName("page") val page: Int,
+    @SerializedName("limit") val limit: Int,
+    @SerializedName("totalPages") val totalPages: Int
+)
+
 interface ApiService {
     @POST("auth/login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
-    @GET("routines")
-    fun getRutinas(): Call<List<Rutina>>
+    @GET("exercises")
+    fun getRutinas(@Header("Authorization") authHeader: String): Call<ExercisesResponse>
 
-    @POST("register")
+    @POST("auth/register")
     fun register(@Body request: RegisterRequest): Call<LoginResponse>
 }

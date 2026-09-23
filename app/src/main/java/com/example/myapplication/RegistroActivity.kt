@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class RegistroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,25 +29,21 @@ class RegistroActivity : AppCompatActivity() {
 
             if (nombre.isNotEmpty() && correo.isNotEmpty() && password.isNotEmpty()) {
                 if (password == confirmar) {
-                    val retrofit = Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2:8000/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build()
-
-                    val api = retrofit.create(ApiService::class.java)
                     val request = RegisterRequest(nombre, correo, password)
 
-                    api.register(request).enqueue(object : Callback<LoginResponse> {
+                    // Usamos el objeto global de Retrofitclient
+                    Retrofitclient.api.register(request).enqueue(object : Callback<LoginResponse> {
                         override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                             if (response.isSuccessful) {
                                 Toast.makeText(this@RegistroActivity, "Cuenta creada", Toast.LENGTH_SHORT).show()
                                 finish()
                             } else {
-                                Toast.makeText(this@RegistroActivity, "Error al crear", Toast.LENGTH_SHORT).show()
+                                val errorMsg = response.errorBody()?.string() ?: "Error al crear"
+                                Toast.makeText(this@RegistroActivity, errorMsg, Toast.LENGTH_LONG).show()
                             }
                         }
                         override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                            Toast.makeText(this@RegistroActivity, "Error de red", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegistroActivity, "Error de red: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
                         }
                     })
                 } else {

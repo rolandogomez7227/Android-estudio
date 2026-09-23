@@ -6,30 +6,34 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load // IMPORTANTE PARA QUE FUNCIONE COIL
 
-class RutinaAdapter(private val rutinas: List<Rutina>) : RecyclerView.Adapter<RutinaAdapter.RutinaViewHolder>() {
+class RutinaAdapter(private val listaEjercicios: List<Rutina>) :
+    RecyclerView.Adapter<RutinaAdapter.RutinaViewHolder>() {
 
     class RutinaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivItemGif: ImageView = view.findViewById(R.id.ivItemGif)
-        val tvItemNombre: TextView = view.findViewById(R.id.tvItemNombre)
+        val tvNombre: TextView = view.findViewById(R.id.tvItemNombre)
+        // Agregamos la referencia a tu ImageView del diseño
+        val ivImagen: ImageView = view.findViewById(R.id.ivItemGif)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RutinaViewHolder {
-        // Aquí cargamos tu "molde" item_rutina.xml
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rutina, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_rutina, parent, false)
         return RutinaViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RutinaViewHolder, position: Int) {
-        val rutina = rutinas[position]
-        holder.tvItemNombre.text = rutina.name // Ponemos el nombre que viene de la BD
+        val ejercicio = listaEjercicios[position]
 
-        // Reproducimos el GIF. Por ahora, usaremos tu GIF local para probar que la lista funciona.
-        Glide.with(holder.itemView.context)
-            .load(R.drawable.press_banca)
-            .into(holder.ivItemGif)
+        // Ponemos el texto
+        holder.tvNombre.text = ejercicio.name
+
+        // Cargamos la imagen con Coil
+        holder.ivImagen.load(ejercicio.image) {
+            crossfade(true) // Hace que aparezca con una animación suave
+        }
     }
 
-    override fun getItemCount() = rutinas.size
+    override fun getItemCount(): Int = listaEjercicios.size
 }
