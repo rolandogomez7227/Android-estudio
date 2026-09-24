@@ -38,6 +38,8 @@
         <activity
             android:name=".CategoriasActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".DetalleActivity"
+            android:exported="false" />
     </application>
 </manifest>

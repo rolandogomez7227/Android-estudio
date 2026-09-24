@@ -14,7 +14,8 @@ data class RegisterRequest(val username: String, val email: String, val password
 data class Rutina(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
-    @SerializedName("image") val image: String?
+    @SerializedName("image") val image: String?,
+    @SerializedName("instructions") val instructions: List<String>?
 )
 
 data class ExercisesResponse(

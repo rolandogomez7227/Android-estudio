@@ -53,7 +53,6 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     dependencies {
-        // ... tus otras dependencias ...
 
         // Librería para cargar imágenes por URL
         implementation("io.coil-kt:coil:2.4.0")

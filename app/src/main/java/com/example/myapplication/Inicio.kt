@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,10 +34,19 @@ class Inicio : AppCompatActivity() {
                 override fun onResponse(call: Call<ExercisesResponse>, response: Response<ExercisesResponse>) {
                     if (response.isSuccessful && response.body() != null) {
                         val listaDeEjercicios = response.body()!!.data
-                        val adapter = RutinaAdapter(listaDeEjercicios) { ejercicioTocado ->
 
-                            android.widget.Toast.makeText(this@Inicio, "Tocaste: ${ejercicioTocado.name}", android.widget.Toast.LENGTH_SHORT).show()
+                        // 4. EL CAMBIO ESTÁ AQUÍ: Reemplazamos el Toast por un Intent hacia DetalleActivity
+                        val adapter = RutinaAdapter(listaDeEjercicios) { ejercicioTocado ->
+                            val intent = Intent(this@Inicio, DetalleActivity::class.java).apply {
+                                putExtra("NOMBRE", ejercicioTocado.name)
+                                putExtra("IMAGEN", ejercicioTocado.image)
+
+                                val instruccionesTexto = ejercicioTocado.instructions?.toString() ?: "Sin instrucciones disponibles."
+                                putExtra("INSTRUCCIONES", instruccionesTexto)
+                            }
+                            startActivity(intent)
                         }
+
                         rvRutinas.adapter = adapter
                     } else {
                         Toast.makeText(this@Inicio, "Error al cargar la lista", Toast.LENGTH_LONG).show()

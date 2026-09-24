@@ -1,9 +1,13 @@
 package com.example.myapplication
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import coil.ImageLoader
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import coil.load
 
 class DetalleActivity : AppCompatActivity() {
@@ -12,20 +16,30 @@ class DetalleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalle)
 
         val tvNombre = findViewById<TextView>(R.id.tvDetalleNombre)
-                val ivGif = findViewById<ImageView>(R.id.ivDetalleGif)
-                val tvInstrucciones = findViewById<TextView>(R.id.tvDetalleInstrucciones)
+        val ivGif = findViewById<ImageView>(R.id.ivDetalleGif)
+        val tvInstrucciones = findViewById<TextView>(R.id.tvDetalleInstrucciones)
 
-                // Atrapamos los datos que nos mande la otra pantalla
-                val nombre = intent.getStringExtra("NOMBRE") ?: "Sin nombre"
+        val nombre = intent.getStringExtra("NOMBRE") ?: "Sin nombre"
         val imagenUrl = intent.getStringExtra("IMAGEN") ?: ""
         val instrucciones = intent.getStringExtra("INSTRUCCIONES") ?: "Instrucciones no disponibles."
 
-        // Ponemos los datos en la pantalla
         tvNombre.text = nombre
         tvInstrucciones.text = instrucciones
 
+        // 1. Preparamos el motor de GIFs
+        val imageLoader = ImageLoader.Builder(this)
+            .components {
+                if (Build.VERSION.SDK_INT >= 28) {
+                    add(ImageDecoderDecoder.Factory())
+                } else {
+                    add(GifDecoder.Factory())
+                }
+            }
+            .build()
+
+        // 2. Cargamos la imagen usando el motor
         if (imagenUrl.isNotEmpty()) {
-            ivGif.load(imagenUrl) {
+            ivGif.load(imagenUrl, imageLoader) {
                 crossfade(true)
             }
         }
