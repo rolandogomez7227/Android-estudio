@@ -33,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
             if (correo.isNotEmpty() && password.isNotEmpty()) {
                 val request = LoginRequest(correo, password)
 
-                // Usamos nuestro cliente centralizado con la IP 10.0.2.2
                 Retrofitclient.api.login(request).enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(
                         call: Call<LoginResponse>,
@@ -51,9 +50,9 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, "¡Sesión iniciada!", Toast.LENGTH_SHORT).show()
 
                             // Navegar al HomeActivity
-                            val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                            val intent = Intent(this@LoginActivity, CategoriasActivity::class.java)
                             startActivity(intent)
-                            finish() // Cerramos el login
+                            finish()
 
                         } else {
                             Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()

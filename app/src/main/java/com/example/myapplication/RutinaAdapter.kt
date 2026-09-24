@@ -6,14 +6,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load // IMPORTANTE PARA QUE FUNCIONE COIL
+import coil.load
 
-class RutinaAdapter(private val listaEjercicios: List<Rutina>) :
-    RecyclerView.Adapter<RutinaAdapter.RutinaViewHolder>() {
+// 1. Agregamos el parámetro "onEjercicioClick" para detectar el toque
+class RutinaAdapter(
+    private val listaEjercicios: List<Rutina>,
+    private val onEjercicioClick: (Rutina) -> Unit
+) : RecyclerView.Adapter<RutinaAdapter.RutinaViewHolder>() {
 
     class RutinaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvNombre: TextView = view.findViewById(R.id.tvItemNombre)
-        // Agregamos la referencia a tu ImageView del diseño
         val ivImagen: ImageView = view.findViewById(R.id.ivItemGif)
     }
 
@@ -31,7 +33,12 @@ class RutinaAdapter(private val listaEjercicios: List<Rutina>) :
 
         // Cargamos la imagen con Coil
         holder.ivImagen.load(ejercicio.image) {
-            crossfade(true) // Hace que aparezca con una animación suave
+            crossfade(true)
+        }
+
+        // 2. NUEVO: Hacemos que toda la tarjeta reaccione al clic
+        holder.itemView.setOnClickListener {
+            onEjercicioClick(ejercicio)
         }
     }
 

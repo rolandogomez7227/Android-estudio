@@ -30,12 +30,14 @@
         <activity
             android:name=".RegistroActivity"
             android:exported="false" />
-
-        <!-- Pantalla principal (lista de rutinas) -->
+        <!-- Registro de las pantallas del flujo -->
         <activity
-            android:name=".HomeActivity"
+            android:name=".Inicio"
+            android:exported="false" />
+
+        <activity
+            android:name=".CategoriasActivity"
             android:exported="false" />
 
     </application>
-
 </manifest>
