@@ -57,5 +57,6 @@ dependencies {
 
         // Librería para cargar imágenes por URL
         implementation("io.coil-kt:coil:2.4.0")
+        implementation("io.coil-kt:coil-gif:2.6.0")
     }
 }
